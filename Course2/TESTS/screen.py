@@ -209,7 +209,8 @@ if __name__ == '__main__':
                 if event.key == pygame.K_ESCAPE:
                     working = False
                 if event.key == pygame.K_r:
-                    line.clear()
+                    index_line = 0
+                    line = [Knot(gameDisplay, 5),]
                 if event.key == pygame.K_p:
                     pause = not pause
                 if event.key == pygame.K_KP_PLUS and type(line[index_line]) is Knot:

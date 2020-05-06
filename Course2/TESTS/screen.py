@@ -85,6 +85,7 @@ class Polyline:
 
 class Knot(Polyline):
     """Smoothed line descendant class"""
+
     def __init__(self, display, steps):
         super().__init__(display)
         self.steps = steps
@@ -145,13 +146,13 @@ class Knot(Polyline):
 
 class GameHelp:
     """Help window class"""
+
     def __init__(self, display, help_menu: dict):
         self.display = display
         self._width = display.get_width()
         self._height = display.get_height()
         self.help_menu = help_menu
         self.isshow = False
-
 
     def show_help_window(self):
         self.display.fill((60, 60, 60))
@@ -210,7 +211,7 @@ if __name__ == '__main__':
                     working = False
                 if event.key == pygame.K_r:
                     index_line = 0
-                    line = [Knot(gameDisplay, 5),]
+                    line = [Knot(gameDisplay, 5), ]
                 if event.key == pygame.K_p:
                     pause = not pause
                 if event.key == pygame.K_KP_PLUS and type(line[index_line]) is Knot:

@@ -1,43 +1,9 @@
 from abc import ABC, abstractmethod
 
-
-class Hero:
-    def __init__(self):
-        self.positive_effects = []
-        self.negative_effects = []
-        self.stats = {
-            "HP": 128,  # health points
-            "MP": 42,  # magic points,
-            "SP": 100,  # skill points
-            "Strength": 15,  # сила
-            "Perception": 4,  # восприятие
-            "Endurance": 8,  # выносливость
-            "Charisma": 2,  # харизма
-            "Intelligence": 3,  # интеллект
-            "Agility": 8,  # ловкость
-            "Luck": 1  # удача
-        }
-
-    def get_positive_effects(self):
-        return self.positive_effects.copy()
-
-    def get_negative_effects(self):
-        return self.negative_effects.copy()
-
-    def get_stats(self):
-        return self.stats.copy()
-
-    def get_all(self):
-        print(self.get_stats())
-        print(self.get_positive_effects())
-        print(self.get_negative_effects())
-
-
 class AbstractEffect(ABC, Hero):
     def __init__(self, base):
         super(Hero).__init__()
         self.base = base
-        self.changes = {}
 
     @abstractmethod
     def get_positive_effects(self):
@@ -55,13 +21,21 @@ class AbstractEffect(ABC, Hero):
 
 
 class AbstractPositive(AbstractEffect):
+    @abstractmethod
+    def get_positive_effects(self):
+        return super().get_positive_effects()
+
     def get_negative_effects(self):
-        return self.base.get_negative_effects()
+        return super().get_negative_effects()
 
 
 class AbstractNegative(AbstractEffect):
     def get_positive_effects(self):
         return self.base.get_positive_effects()
+
+    @abstractmethod
+    def get_negative_effects(self):
+        return self.base.get_negative_effects()
 
 
 class Berserk(AbstractPositive):
@@ -138,31 +112,3 @@ class Curse(AbstractNegative):
 
     def get_negative_effects(self):
         return self.base.get_negative_effects() + ['Curse']
-
-
-hero = Hero()
-print(hero.get_stats())
-berserk = Berserk(hero)
-besrerk1 = Berserk(berserk)
-ber2 = Berserk(besrerk1)
-print(berserk.get_stats())
-print(berserk.get_positive_effects())
-print(berserk.get_negative_effects())
-print(besrerk1.get_positive_effects())
-
-
-bl1 = Blessing(ber2)
-ber3 = Berserk(bl1)
-print(ber3.get_positive_effects())
-print('------------------')
-print(hero.get_stats())
-print(besrerk1.get_stats())
-print(ber2.get_stats())
-print(ber3.get_stats())
-print(bl1.get_stats())
-print('----------------')
-weak = Weakness(bl1)
-weak.get_all()
-print('-----------------')
-cour = Curse(weak)
-cour.get_all()

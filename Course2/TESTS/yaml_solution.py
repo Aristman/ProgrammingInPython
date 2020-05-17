@@ -149,34 +149,3 @@ def constructor(loader, suffix_, node):
 
 loader = yaml.Loader
 loader.add_multi_constructor('!', constructor)
-Levels2 = yaml.load(
-    '''
-levels:
-    - !easy_level {}
-    - !medium_level
-     enemy: ['rat']
-    - !hard_level
-        enemy:
-            - rat
-            - snake
-            - dragon
-        enemy_count: 10
-''')
-print(Levels2)
-
-Levels = {'levels': []}
-_map = EasyLevel.Map()
-_obj = EasyLevel.Objects()
-Levels['levels'].append({'map': _map, 'obj': _obj})
-
-_map = MediumLevel.Map()
-_obj = MediumLevel.Objects()
-_obj.config = {'enemy': ['rat']}
-Levels['levels'].append({'map': _map, 'obj': _obj})
-
-_map = HardLevel.Map()
-_obj = HardLevel.Objects()
-_obj.config = {'enemy': ['rat', 'snake', 'dragon'], 'enemy_count': 10}
-Levels['levels'].append({'map': _map, 'obj': _obj})
-print(Levels)
-print(Levels2['levels'][2]['obj'].config)

@@ -108,6 +108,7 @@ def factory_constructor(loader, node):
 
 loader = yaml.Loader
 loader.add_constructor('!factory', factory_constructor)
+
 hero = yaml.load(hero_yaml).create_hero()
 hero.hit()
 hero.cast()

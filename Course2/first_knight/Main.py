@@ -1,7 +1,7 @@
 import pygame
 import os
 import Objects
-import ScreenEngine
+import ScreenEngine as SE
 import Logic
 import Service
 
@@ -10,7 +10,7 @@ SCREEN_DIM = (800, 600)
 
 pygame.init()
 gameDisplay = pygame.display.set_mode(SCREEN_DIM)
-pygame.display.set_caption("MyRPG")
+pygame.display.set_caption("First Knight")
 KEYBOARD_CONTROL = True
 
 if not KEYBOARD_CONTROL:
@@ -31,16 +31,17 @@ def create_game(sprite_size, is_new):
         hero = Objects.Hero(base_stats, Service.create_sprite(
             os.path.join("texture", "Hero.png"), sprite_size))
         engine = Logic.GameEngine()
+        engine.subscribe(hero)
+        engine.add_hero(hero)
         Service.service_init(sprite_size)
         Service.reload_game(engine, hero)
-        with ScreenEngine as SE:
-            drawer = SE.GameSurface((640, 480), pygame.SRCALPHA, (0, 480),
-                                    SE.ProgressBar((640, 120), (640, 0),
-                                                   SE.InfoWindow((160, 600), (50, 50),
-                                                                 SE.HelpWindow((700, 500), pygame.SRCALPHA, (0, 0),
-                                                                               SE.ScreenHandle(
-                                                                                   (0, 0))
-                                                                               ))))
+        drawer = SE.GameSurface((640, 480), pygame.SRCALPHA, (0, 480),
+                                SE.ProgressBar((640, 120), (640, 0),
+                                               SE.InfoWindow((160, 600), (50, 50),
+                                                             SE.HelpWindow((700, 500), pygame.SRCALPHA, (0, 0),
+                                                                           SE.ScreenHandle(
+                                                                               (0, 0))
+                                                                           ))))
 
     else:
         engine.sprite_size = sprite_size
@@ -55,7 +56,7 @@ def create_game(sprite_size, is_new):
     iteration = 0
 
 
-size = 60
+size = 40
 create_game(size, True)
 
 while engine.working:

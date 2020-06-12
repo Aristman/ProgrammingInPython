@@ -1,28 +1,56 @@
-from bs4 import BeautifulSoup
-import os
+from bs4 import BeautifulSoup, NavigableString
 import unittest
 
 
+def find_tag_list(tag_list, tag_name):
+    result = 0
+    for tag_ol in tag_list.find_all(tag_name):
+        if tag_ol.find_parents(('ul', 'ol')) == []:
+            result += 1
+    return result
+
+
+def find_a_recursive(soup):
+    max_count_a = 0
+    count_a = 0
+    isSquence = False
+    for tag in soup.contents:
+        if tag.name == 'a' and isSquence:
+            count_a += 1
+        elif tag.name == 'a' and not isSquence:
+            count_a = 1
+            isSquence = True
+        elif isinstance(tag, NavigableString):
+            continue
+        else:
+            isSquence = False
+            if count_a > max_count_a:
+                max_count_a = count_a
+    for child_tag in soup.children:
+        if not isinstance(child_tag, NavigableString):
+            count_a = find_a_recursive(child_tag)
+        if count_a > max_count_a:
+            max_count_a = count_a
+    return max_count_a
+
+
 def parse(path_to_file):
-    # Поместите ваш код здесь.
-    # ВАЖНО!!!
-    # При открытии файла, добавьте в функцию open необязательный параметр
-    # encoding='utf-8', его отсутствие в коде будет вызвать падение вашего
-    # решения на грейдере с ошибкой UnicodeDecodeError
     imgs = headers = linkslen = lists = 0
     with open(path_to_file, 'r', encoding='utf-8') as f:
         html = f.read()
     soup = BeautifulSoup(html, 'lxml')
-    img_soup = soup.find('div', id='bodyContent')
-    for img in img_soup.find_all('img', width=True):
+    source_soup = soup.find('div', id='bodyContent')
+    for img in source_soup.find_all('img', width=True):
         if int(img.get('width')) > 199:
             imgs += 1
-    for h in soup.find_all(('h1', 'h2', 'h3', 'h4', 'h5', 'h6'), id=False):
+
+    for h in source_soup.find_all(('h1', 'h2', 'h3', 'h4', 'h5', 'h6')):
         if h.text[0] in ['E', 'T', 'C']:
-            headers +=1
-    links_list = soup.find_all('a')
+            headers += 1
 
+    linkslen = find_a_recursive(source_soup)
 
+    lists += find_tag_list(source_soup, ('ul', 'ol'))
     return [imgs, headers, linkslen, lists]
 
 
@@ -41,9 +69,4 @@ class TestParse(unittest.TestCase):
 
 
 if __name__ == '__main__':
-    #unittest.main()
-    print(parse('wiki/Stone_Age'))
-    print(parse('wiki/Brain'))
-    print(parse('wiki/Artificial_intelligence'))
-    print(parse('wiki/Python_(programming_language)'))
-    print(parse('wiki/Spectrogram'))
+    unittest.main()

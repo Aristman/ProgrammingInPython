@@ -1,7 +1,1 @@
-{% if params %}
-    {{ method }}
-    {% for param, value in params.items %}
-        {{ param }}: {{ value.0 }}
-    {% endfor %}
-{% endif %}
-statement is {{ statement }}
+{% if params %} {{ method }}{% for param, value in params.items %} {{ param }}: {{ value.0 }}{% endfor %}{% endif %} statement is {{ statement }}

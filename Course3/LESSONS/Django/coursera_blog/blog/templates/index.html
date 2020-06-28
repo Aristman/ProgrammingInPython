@@ -1,0 +1,14 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Мой первый блог</title>
+</head>
+<body>
+{% for rec in blog %}
+    <h2>{{ rec.name }}</h2>
+<p>{{ rec.tagline }}</p>
+{% endfor %}
+</body>
+</html>

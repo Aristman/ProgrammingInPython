@@ -6,7 +6,7 @@ from django.template import loader
 
 
 def index(request):
-    return HttpResponse('OK')
+    return render(request, 'core/index.html')
 
 def my_view(request):
     t = loader.get_template('templates/core.html')

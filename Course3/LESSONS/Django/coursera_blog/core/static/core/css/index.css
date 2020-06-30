@@ -1,19 +1,20 @@
-.test {
-    font-family: "Roboto", "Lucida Grante", Verdana, Arial, sans-serif;
-    font-style: italic;
-    font-weight: bold;
-    font-size: 40px;
-    color: #ff0000;
-    background-color: #00ff00;
+.navigation{
+    margin-bottom: 50px;
 }
 
-.test2{
-    height: 100px;
-    padding: 10px;
-    border: 5px solid #00ff00;
-    color: #ff0000;
-    margin: 10px;
+.topic-list__item{
+    margin-top: 20px;
+}
 
-    display: inline-block;
+.category{
+    background-color: #f8a79c;
+    padding: 20px;
+}
 
+.topic{
+    margin-top: 20px;
+}
+div{
+    font-size: 2em;
+    background-color: #533f03;
 }

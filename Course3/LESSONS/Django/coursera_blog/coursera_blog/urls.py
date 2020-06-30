@@ -16,13 +16,14 @@ Including another URLconf
 #from core.views import index
 
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, re_path
 
 import core.views as core
 
 import blog.views as blog
 
 urlpatterns = [
+    re_path(r'topic/(?P<pk>\d+)', core.topic_details, name='topic_details'),
     path('blog/index/', blog.index),
     path('index/', core.index),
     path('admin/', admin.site.urls),

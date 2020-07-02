@@ -1,0 +1,33 @@
+.reg_block {
+    padding: 20px;
+}
+a {
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+img.avatar {
+    width: 100px;
+    height: 100px;
+    border-style: solid;
+}
+
+.rating {
+    width: 30px;
+    height: 22px;
+}
+
+.rating_row {
+    padding-top: 5px;
+}
+
+.btn-primary {
+    padding: 0px 0px;
+    width: 20px;
+}
+
+.btn-group {
+    height: 22px;
+    padding-left: 10px;
+}
+

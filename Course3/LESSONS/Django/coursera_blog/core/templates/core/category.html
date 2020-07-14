@@ -1,8 +1,7 @@
 <div class="category">
-    <div class="categiry__item">
-        <a href="#">Test1</a>
-    </div>
-    <div class="categiry__item">
-        <a href="#">Test2</a>
-    </div>
+    {% for category in categories %}
+        <div class="categiry__item">
+            <a href="{% url "index" %}?category={{ category.pk }}">{{ category.title }}</a>
+        </div>
+    {% endfor %}
 </div>

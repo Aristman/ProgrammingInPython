@@ -21,8 +21,8 @@ img.avatar {
     padding-top: 5px;
 }
 
-.btn-primary {
-    padding: 0px 0px;
+.btn-rate {
+    padding: 0px;
     width: 20px;
 }
 
@@ -31,3 +31,17 @@ img.avatar {
     padding-left: 10px;
 }
 
+.item-block {
+    border: 2px;
+    border-style: solid;
+    padding: 10px;
+    margin: 20px;
+}
+
+.tags-block {
+    padding-top: 70px;
+}
+
+.members-block {
+    padding-top: 100px;
+}

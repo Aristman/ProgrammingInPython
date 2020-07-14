@@ -16,8 +16,8 @@ Including another URLconf
 #from core.views import index
 
 from django.contrib import admin
-from django.urls import path, re_path
-
+from django.urls import path, re_path, include
+from django.contrib.auth import views as auth_views
 import core.views as core
 
 import blog.views as blog
@@ -25,6 +25,9 @@ import blog.views as blog
 urlpatterns = [
     re_path(r'topic/(?P<pk>\d+)', core.topic_details, name='topic_details'),
     path('blog/index/', blog.index),
-    path('index/', core.index),
+    path('index/', core.index, name='index'),
     path('admin/', admin.site.urls),
+    path('form/', include('form1.urls')),
+    path('login/', auth_views.LoginView.as_view()),
+    path('feedback/', include('feedback.urls')),
 ]
